@@ -11,6 +11,7 @@ public class App {
                 ,101,true,"red",100,54,123);
 
         UserInterface userInterface = new UserInterface();
-        userInterface.run();
+        //userInterface.run();
+        System.out.println(userInterface.addBike(3));
     }
 }

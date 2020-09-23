@@ -1,9 +1,12 @@
 package ui;
 
+import model.enums.OptionalTypeEnum;
+
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class UserInterface {
-    private final static String MAIN_PAGE =
+    private final static String MAIN_MENU =
             "Please make your choice:\n" +
                     "1 - Show the entire EcoBike catalog\n" +
                     "2 – Add a new folding bike\n" +
@@ -37,14 +40,60 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     public void run() {
-        System.out.println(MAIN_PAGE);
-        System.out.print("Specify the index : ");
-        int idx = scanner.nextInt();
-        System.out.println("need");
+        while (true) {
+            System.out.println(MAIN_MENU);
+            int idxMainMenu = scanner.nextInt();
+            if (checkOptional(idxMainMenu)) {
+
+            } else {
+
+            }
+        }
     }
 
-    public String addBike() {
+    public String addBike(int idxMainMenu) {
+        StringBuilder stringBuilder = new StringBuilder();
         System.out.print("");
-        return "";
+        for (int i = 0; i < BASIC_INFO.length; i++) {
+
+            System.out.print(BASIC_INFO[i]);
+            stringBuilder.append(scanner.nextLine()).append(" ");
+
+            if (idxMainMenu == 2 && i == 0) {
+                for (int j = 0; j < INFO_FOLDING_BIKE.length; j++) {
+                    System.out.print(INFO_FOLDING_BIKE[j]);
+                    stringBuilder.append(scanner.nextLine()).append(" ");
+                }
+            }
+
+            if (idxMainMenu == 3 || idxMainMenu == 4) {
+                if (i == 0) {
+                    System.out.print(INFO_EBIKE[0]);
+                    stringBuilder.append(scanner.nextLine()).append(" ");
+                }
+                if (i == 2) {
+                    for (int j = 1; j < INFO_EBIKE.length; j++) {
+                        System.out.print(INFO_EBIKE[j]);
+                        stringBuilder.append(scanner.nextLine()).append(" ");
+                    }
+                }
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public void stopApplication() {
+        System.exit(0);
+    }
+
+    private boolean checkOptional(int idx) {
+        return Arrays.stream(OptionalTypeEnum.values()).anyMatch(e -> e.getOptional() == idx);
+    }
+
+    private OptionalTypeEnum findOptional(int idxOptional) {
+        return Arrays.stream(OptionalTypeEnum.values())
+                .filter(e -> e.getOptional() == idxOptional)
+                .findFirst().get();
     }
 }
