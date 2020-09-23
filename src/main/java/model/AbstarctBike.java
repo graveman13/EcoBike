@@ -78,4 +78,32 @@ public abstract class AbstarctBike {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstarctBike object = (AbstarctBike) o;
+        return this.basicType.equals(object.basicType) &&
+                this.productType.equals(object.productType) &&
+                this.brand.equals(object.brand) &&
+                this.weightOfTheBike == object.weightOfTheBike &&
+                this.isLigths == object.isLigths &&
+                this.color.equals(object.color) &&
+                this.price == object.price;
+    }
+
+    @Override
+    public int hashCode() {
+        int resual = 31;
+        resual += 61 + (this.basicType == null ? 0 : this.basicType.hashCode());
+        resual += 61 + (this.productType == null ? 0 : this.productType.hashCode());
+        resual += 61 + (this.brand == null ? 0 : this.brand.hashCode());
+        resual += 61 + this.weightOfTheBike;
+        resual += 61 + (Boolean.valueOf(this.isLigths).equals(true) ? 11 : 0);
+        resual += 61 + (this.color == null ? 0 : this.color.hashCode());
+        resual += 61 + (this.color == null ? 0 : this.color.hashCode());
+        resual += 61 + price;
+        return resual;
+    }
 }
